@@ -21,20 +21,24 @@ class VoitureRepository extends ServiceEntityRepository
         parent::__construct($registry, Voiture::class);
     }
 
-//    /**
-//     * @return Voiture[] Returns an array of Voiture objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+  /**
+     * @return Voiture[] Returns an array of Voiture objects
+     */
+    public function GetListeVoitures(): array
+    {
+        return $this->createQueryBuilder('v')
+        ->join('v.leModele','m')
+        ->join('v.lesOptions','o')
+        ->join('m.leMarque',"ma")
+        ->select('v.nom as mv,m.nom as mm,ma.nom as mma')
+
+            
+
+
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Voiture
 //    {

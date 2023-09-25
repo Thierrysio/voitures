@@ -19,10 +19,13 @@ class Voiture
     private ?string $nom = null;
 
     #[ORM\ManyToOne]
-    private ?modele $leModele = null;
+    private ?Modele $leModele = null;
 
     #[ORM\ManyToMany(targetEntity: option::class, inversedBy: 'lesVoitures')]
     private Collection $lesOptions;
+
+    #[ORM\ManyToOne(inversedBy: 'lesVoitures')]
+    private ?Modele $lesModeles = null;
 
     public function __construct()
     {
@@ -46,12 +49,12 @@ class Voiture
         return $this;
     }
 
-    public function getLeModele(): ?modele
+    public function getLeModele(): ?Modele
     {
         return $this->leModele;
     }
 
-    public function setLeModele(?modele $leModele): static
+    public function setLeModele(?Modele $leModele): static
     {
         $this->leModele = $leModele;
 
@@ -78,6 +81,18 @@ class Voiture
     public function removeLesOption(option $lesOption): static
     {
         $this->lesOptions->removeElement($lesOption);
+
+        return $this;
+    }
+
+    public function getLesModeles(): ?Modele
+    {
+        return $this->lesModeles;
+    }
+
+    public function setLesModeles(?Modele $lesModeles): static
+    {
+        $this->lesModeles = $lesModeles;
 
         return $this;
     }

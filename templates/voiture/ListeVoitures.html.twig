@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<table class="table table-striped table-hover table-full-width">
+    <thead>
+        <tr>
+            <th>Chambre</th>
+            <th>Vues</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+{% for voiture in ListeVoitures%}
+    <tr>
+        <td>{{ voiture.mv }}</td>
+        <td>{{ voiture.mm }}</td>
+        <td>{{ voiture.mma }}</td>
+    </tr>
+{% endfor %}
+
+ 
+    </tbody>
+</table>
+
+{% endblock %}
