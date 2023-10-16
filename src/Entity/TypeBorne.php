@@ -30,8 +30,16 @@ class TypeBorne
     #[ORM\OneToMany(mappedBy: 'leType', targetEntity: Borne::class)]
     private Collection $lesBornes;
 
-    public function __construct()
-    {
+    public function __construct(
+        int $codeTypeBorne,
+        int $dureeRevision,
+        int $nbJoursEntreRevisions,
+        int $nbUnitesEntreRevisions
+    ) {
+        $this->codeTypeBorne = $codeTypeBorne;
+        $this->dureeRevision = $dureeRevision;
+        $this->nbJoursEntreRevisions = $nbJoursEntreRevisions;
+        $this->nbUnitesEntreRevisions = $nbUnitesEntreRevisions;
         $this->lesBornes = new ArrayCollection();
     }
 

@@ -9,7 +9,7 @@
 import './styles/app.scss';
 import "bootstrap";
 import { createApp } from 'vue';
-import App from './components/app.vue';
+import App from './components/app3.vue';
 createApp(App).mount('#app');
 
 /*import { createApp } from 'vue';

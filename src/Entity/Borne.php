@@ -5,7 +5,8 @@ namespace App\Entity;
 use App\Repository\BorneRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use DateTime;
+use DateTimeInterface;
 #[ORM\Entity(repositoryClass: BorneRepository::class)]
 class Borne
 {
@@ -31,6 +32,13 @@ class Borne
 
     #[ORM\ManyToOne(inversedBy: 'lesBornes')]
     private ?Station $laStation = null;
+
+    public function __construct(?int $idBorne, \DateTimeInterface $dateDerniereRevision, int $indiceCompteurUnites, TypeBorne $leType) {
+        $this->idBorne = $idBorne;
+        $this->dateDerniereRevision = $dateDerniereRevision;
+        $this->indiceCompteurUnites = $indiceCompteurUnites;
+        $this->leType = $leType;
+    }
 
     public function getId(): ?int
     {
@@ -115,8 +123,7 @@ class Borne
     }
 
     public function estAReviser() {
-        // Vérifier sur la base du temps écoulé depuis la dernière révision
-        $dateActuelle = new DateTime();
+        $dateActuelle = new \DateTime();
         $interval = $dateActuelle->diff($this->dateDerniereRevision);
         $joursEcoules = $interval->days;
         if ($joursEcoules >= $this->leType->getNbJoursEntreRevisions()) {
